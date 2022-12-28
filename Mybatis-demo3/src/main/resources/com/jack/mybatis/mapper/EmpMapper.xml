@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jack.mybatis.mapper.EmpMapper">
+
+    <resultMap id="empResultMap" type="Emp">
+        <id property="empNo" column="emp_no"></id>
+        <result property="empName" column="emp_name"></result>
+        <result property="age" column="age"></result>
+        <result property="sex" column="sex"></result>
+        <result property="email" column="email"></result>
+        <result property="deptNo" column="dept_no"></result>
+    </resultMap>
+
+    <resultMap id="getEmpAndDept" type="Emp">
+        <id property="empNo" column="emp_no"></id>
+        <result property="empName" column="emp_name"></result>
+        <result property="age" column="age"></result>
+        <result property="sex" column="sex"></result>
+        <result property="email" column="email"></result>
+        <!--级联-->
+        <result property="dept.deptNo" column="dept_no"></result>
+        <result property="dept.deptName" column="dept_name"></result>
+    </resultMap>
+
+    <resultMap id="getEmpAndDept1" type="Emp">
+        <id property="empNo" column="emp_no"></id>
+        <result property="empName" column="emp_name"></result>
+        <result property="age" column="age"></result>
+        <result property="sex" column="sex"></result>
+        <result property="email" column="email"></result>
+        <!--第二种多对一方式-->
+        <association property="dept" javaType="Dept">
+            <id column="deptNo" property="dept_no"></id>
+            <result column="deptName" property="dept_name"></result>
+        </association>
+    </resultMap>
+
+
+
+
+    <!--    <select id="getAllEmp" resultType="Emp">-->
+    <!--        select * from t_emp-->
+    <!--    </select>-->
+    <select id="getAllEmp" resultMap="empResultMap">
+        select * from t_emp
+    </select>
+
+
+    <select id="getEmpAndDept" resultMap="getEmpAndDept">
+    select * from t_emp left join t_dept on t_emp.dept_no = t_dept.dept_no where emp_no = #{empNo}
+</select>
+
+
+</mapper>

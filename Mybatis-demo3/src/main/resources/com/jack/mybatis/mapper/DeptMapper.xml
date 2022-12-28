@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jack.mybatis.mapper.DeptMapper">
+
+    <!--一对多查询-->
+    <resultMap id="testGetDeptAndEmp" type="dept">
+        <id property="deptNo" column="dept_no"></id>
+        <result property="deptName" column="dept_name"></result>
+        <collection property="empList" ofType="emp">
+            <id property="empNo" column="emp_no"></id>
+            <result property="empName" column="emp_name"></result>
+            <result property="age" column="age"></result>
+            <result property="sex" column="sex"></result>
+            <result property="email" column="email"></result>
+        </collection>
+    </resultMap>
+    <select id="getDeptAndEmp" resultMap="testGetDeptAndEmp">
+        select * from t_dept left join t_emp on t_emp.dept_no = t_dept.dept_no where t_dept.dept_no = 1
+    </select>
+</mapper>

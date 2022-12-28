@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jack.mybatis.mapper.UserMapper">
+    <!--int insertUser();-->
+    <insert id="insertUser">insert into t_user values(null,'张三','123',23,'女','123@qq.com')</insert>
+
+    <!--
+    resultType:默认映射 字段名跟bean属性名一致
+    resultMap:自定义映射 可跟bean不一样
+     User getUserById();
+    -->
+    <select id="getUserById" resultType="User">select * from t_user where id=1 </select>
+    <!--getAllUser-->
+    <select id="getAllUser" resultType="User">select * from t_user</select>
+</mapper>
